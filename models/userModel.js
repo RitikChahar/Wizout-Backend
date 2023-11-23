@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const authSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     uid: {
       type: String,
@@ -10,18 +10,13 @@ const authSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
-    primary_email: {
+    email: {
       type: String,
       required: true,
       unique: true,
     },
-    secondary_email: {
-      type: String,
-      required: true,
-    },
-    p_number: {
+    password: {
       type: String,
       required: true,
     },
@@ -29,12 +24,21 @@ const authSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    password: {
+    otp: {
       type: String,
-      required: true,
     },
+    travelId: {
+      type: [mongoose.ObjectId],
+    },
+    requestId: {
+      type: [mongoose.ObjectId],
+    }
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-export default mongoose.model("authModel", authSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
